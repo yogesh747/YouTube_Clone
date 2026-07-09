@@ -1,0 +1,11 @@
+.layout{
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 65px);
+}
+
+.mainLayout{
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
