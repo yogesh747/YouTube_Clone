@@ -1,14 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Style from './css/Nav.module.css'
-import { Bell, Menu, Plus, Search } from 'lucide-react'
+import { Bell, Menu, Plus, Search, Mic } from 'lucide-react'
 
 const Navbar = ({ collapse, setCollapse }) => {
+
+  const [isFocused, setIsFocused] = useState(false);
+  
   return (
     <nav className={Style.navbar}>
       
       <section className={Style.section}>
 
-        <div style={{display:"flex", width:"12vw",justifyContent:"space-around"}}>
+        <div style={{display:"flex", width:"18vw",justifyContent:"space-evenly"}}>
 
           <Menu
           size={40}
@@ -35,8 +38,8 @@ const Navbar = ({ collapse, setCollapse }) => {
     style={{
       pointerEvents: "none",
       display: "inherit",
-      width: "100%",
-      height: "100%",
+      width: "100px",
+      height: "37px",
       color:"white"
     }}
   >
@@ -60,19 +63,43 @@ const Navbar = ({ collapse, setCollapse }) => {
 </div>
 
         
-        </div>
+      </div>
 
         {/* search bar */}
 
         <div className={Style.SearchBox}>
-          <div className={ Style.SearchBoxChild}>
-            <input type="text" className={Style.input} placeholder='Search'/>
+
+          {isFocused && (
+            <div className={Style.leftSearch}>
+              <Search size={20} />
+            </div>
+          )}
+
+          <div
+            className={`${Style.SearchBoxChild} ${
+              isFocused ? Style.activeSearch : ""
+            }`}
+          >
+
+            <input
+              type="text"
+              placeholder="Search"
+              className={Style.input}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+            />
+
             <button className={Style.btnSearch}>
-              <Search/>
+              <Search />
             </button>
-          </div>
+
         </div>
 
+        <button className={Style.btnMic}>
+          <Mic />
+        </button>
+
+      </div>
         {/* Bell icons */}
         <div className={Style.bellParent}>
           <div className={Style.createPlus}>
